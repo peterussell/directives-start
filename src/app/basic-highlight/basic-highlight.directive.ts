@@ -15,6 +15,10 @@ export class BasicHighlightDirective implements OnInit {
   /* Directives don't have all lifecycle events (eg. ones related to view
      events don't make sense for a directive), but it does have some. */
   ngOnInit() {
+    /* NB: it's bad practice to access elements directly and update their
+       properties like we are below. See the next commit for a different way
+       to do this. The line below can cause issues where maybe there isn't
+       a view being rendered, eg. service workers. */
     this.myElementRef.nativeElement.style.backgroundColor = 'green';
   }
 }
