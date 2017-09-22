@@ -26,7 +26,35 @@
       </ul>
       <!-- We don't use square brackets for our own directors, not binding it -->
       <p appBasicHighlight>Style me with BasicHighlightDirective!</p>
-      <p appBetterHighlight>Style me with BetterHighlightDirective!</p>
+      <p
+        appBetterHighlight
+        [defaultColor]="'slategray'"
+        [highlightColor]="'yellow'">Style me with BetterHighlightDirective!</p>
+
+      <!-- NB 1: if we provide an alias to HostBinding(<alias>) which has the
+           *same name* as the custom directive (eg. appBetterHighlight), then
+           this provides a shortcut, where we can bind the value passed to
+           appBetterHighlight (the *binding*, not the *directive*), which is
+           then set on one of the TypeScript properties of the
+           appBetterHighlight class, eg.... -->
+
+      <!-- <p [appBetterHighlight]="'red'" [highlightColor]="'yellow'"> -->
+      <!-- @Input('appBetterHighlight') defaultColor: string = 'transparent'; -->
+
+      <!-- ... would bind to the property with alias 'appBetterHighlight' on the
+           appBetterHighlight directive class. Note this *only* works for
+           one class property (note we still have to use normal binding for
+           'highlightColor') -->
+
+      <!-- NB 2: there is a known shortcut, where if the property being bound
+           on a directive is a *string*, then we can remove both the square
+           brackets around the binding (@Input) name, and remove the single
+           quotations around the value. eg.
+           <p appBetterHighlight [highlightColor]="'red'">
+             ... becomes ...
+           <p appBetterHighlight highlightColor="red">
+
+           It is important to be sure this is still a binding, just a shortcut -->
     </div>
   </div>
 </div>
