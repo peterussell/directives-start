@@ -6,7 +6,7 @@
         (click)="oddOnly = !oddOnly">Only show odd numbers</button>
       <br><br>
       <ul class="list-group">
-        <div *ngIf="oddOnly">
+        <!-- <div *ngIf="oddOnly">
           <li
             class="list-group-item"
             *ngFor="let odd of oddNumbers"
@@ -16,6 +16,25 @@
           </li>
         </div>
         <div *ngIf="!oddOnly">
+          <li
+            class="list-group-item"
+            *ngFor="let even of evenNumbers"
+            [ngClass]="{even: even % 2 === 0}">
+              {{ even }}
+          </li>
+        </div> -->
+
+        <!-- Do the same as above, but using our 'reversed' custom 'unless' structural directive -->
+        <div *appUnless="!oddOnly">
+          <li
+            class="list-group-item"
+            *ngFor="let odd of oddNumbers"
+            [ngClass]="{odd: odd % 2 !== 0}"
+            [ngStyle]="{backgroundColor: odd % 2 !== 0 ? 'yellow' : 'green'}">
+              {{ odd }}
+          </li>
+        </div>
+        <div *appUnless="oddOnly">
           <li
             class="list-group-item"
             *ngFor="let even of evenNumbers"
